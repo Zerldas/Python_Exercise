@@ -1,0 +1,2 @@
+Viết một chương trình OOP để quản lý cái gì cũng đc
+
