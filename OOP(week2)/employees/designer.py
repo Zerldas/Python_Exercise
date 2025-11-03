@@ -1,7 +1,5 @@
-# Nhập lớp Person từ tệp person.py để thực hiện kế thừa.
 from .person import Person
 
-# Lớp Designer kế thừa từ Person, đại diện cho một nhân viên thiết kế.
 class Designer(Person):
     def __init__(self, id_person, first_name, last_name, birth, email, kpi):
         super().__init__(id_person, first_name, last_name, birth, email)
@@ -9,14 +7,13 @@ class Designer(Person):
 
     @property
     def kpi(self) -> str:
-        # Getter để lấy ra giá trị của KPI.
-        return self._kpi
+        return self.kpi
     
     @kpi.setter
     def kpi(self, kpi_value: str):
         if not isinstance(kpi_value, str) or not kpi_value.strip():
             raise ValueError("Chuyên môn/KPI không được để trống")
-        self._kpi = kpi_value
+        self.kpi = kpi_value
 
     # --- Salary Calculation ---
     @property

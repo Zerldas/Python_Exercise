@@ -7,7 +7,7 @@ class Manager(Person):
 
     @property
     def experience(self) -> int:
-        return self._experience
+        return self.experience
 
     @experience.setter
     def experience(self, exp_value: int):

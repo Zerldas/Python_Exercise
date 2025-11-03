@@ -8,13 +8,13 @@ class Dev(Person):
     # --- Role ---
     @property
     def role(self) -> str:
-        return self._role
+        return self.role
                 
     @role.setter
     def role(self, role_value: str):
         if not isinstance(role_value, str) or not role_value.strip():
             raise ValueError("Vai trò không được để trống")
-        self._role = role_value # Junior, Senior, ...
+        self.role = role_value # Junior, Senior, ...
 
     @property
     def calculate_salary(self) -> float:

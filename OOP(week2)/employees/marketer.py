@@ -9,7 +9,7 @@ class Marketer(Person):
 
     @property
     def specialization(self) -> str:
-        return self._specialization
+        return self.specialization
     
     @specialization.setter
     def specialization(self, spec_value: str):

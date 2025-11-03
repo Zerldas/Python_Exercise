@@ -5,7 +5,7 @@ import datetime as date
 class Person(ABC):
     # Thuộc tính private, sử dụng __ để "name mangling", tránh bị ghi đè ở lớp con.
     _base_salary = 2000.0 # Lương cơ bản chung
-
+    _age = 0
     # Phương thức khởi tạo (constructor) của lớp.
     def __init__(self, id_person, first_name, last_name, birth, email):
         self.id = id_person
@@ -67,12 +67,12 @@ class Person(ABC):
         self._birth = birth
         self._age = age
 
-    # --- Age (Read-Only) ---
+    # Age (Read-Only)
     @property
     def age(self):
         return self._age
 
-    # --- Email ---
+    # Email
     @property
     def email(self):
         return self._email
@@ -92,7 +92,6 @@ class Person(ABC):
     def calculate_salary(self) -> float:
         pass
 
-    # --- String Representation ---
     def __str__(self):
         return f"ID: {self.id}, Name: {self.first_name} {self.last_name}, Age: {self.age}"
 
