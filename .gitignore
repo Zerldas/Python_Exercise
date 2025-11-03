@@ -1,5 +1,4 @@
 /Project/
-venv/
+venv311/
 __pycache__/
-.drawio
 /.qodo/
