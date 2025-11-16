@@ -1,0 +1,78 @@
+[EMPLOYEES]
+# id | first_name | last_name | birth | email | role | extra_info
+
+# ==== 20 DEV (role) ====
+E1 | John | Miller | 1990-02-11 | john.miller@example.com | dev | Senior
+E2 | David | Tran | 1993-05-20 | david.tran@example.com | dev | Mid
+E3 | Lucas | Lee | 1991-03-14 | lucas.lee@example.com | dev | Junior
+E4 | Henry | Park | 1994-10-09 | henry.park@example.com | dev | Senior
+E5 | James | Kim | 1992-07-07 | james.kim@example.com | dev | Lead
+E6 | Ethan | Chen | 1995-11-30 | ethan.chen@example.com | dev | Mid
+E7 | Ryan | Pham | 1990-06-18 | ryan.pham@example.com | dev | Junior
+E8 | Daniel | Brown | 1993-09-15 | daniel.brown@example.com | dev | Senior
+E9 | Kevin | Wilson | 1991-12-22 | kevin.wilson@example.com | dev | Lead
+E10 | Oliver | Nguyen | 1996-01-25 | oliver.nguyen@example.com | dev | Mid
+E11 | Mason | Davis | 1994-04-17 | mason.davis@example.com | dev | Junior
+E12 | Logan | White | 1992-02-12 | logan.white@example.com | dev | Senior
+E13 | Aaron | Young | 1995-07-27 | aaron.young@example.com | dev | Mid
+E14 | Calvin | Morris | 1993-08-06 | calvin.morris@example.com | dev | Junior
+E15 | Jason | Carter | 1991-01-08 | jason.carter@example.com | dev | Lead
+E16 | Tyler | Evans | 1994-11-10 | tyler.evans@example.com | dev | Mid
+E17 | Brian | Ward | 1992-09-03 | brian.ward@example.com | dev | Senior
+E18 | Felix | Adams | 1993-12-19 | felix.adams@example.com | dev | Junior
+E19 | Derek | Scott | 1990-03-09 | derek.scott@example.com | dev | Senior
+E20 | Tony | Walker | 1996-05-21 | tony.walker@example.com | dev | Mid
+
+# ==== 15 DESIGNER (kpi) ====
+E21 | Anna | Nguyen | 1995-03-12 | anna.nguyen@example.com | designer | Good
+E22 | Sarah | Kim | 1994-08-25 | sarah.kim@example.com | designer | Excellent
+E23 | Julia | Parker | 1996-01-05 | julia.parker@example.com | designer | Enough
+E24 | Emma | Hall | 1993-09-19 | emma.hall@example.com | designer | Not Enough
+E25 | Grace | Lewis | 1992-04-07 | grace.lewis@example.com | designer | Excellent
+E26 | Mia | Robinson | 1994-07-11 | mia.robinson@example.com | designer | Good
+E27 | Lily | Clark | 1996-02-20 | lily.clark@example.com | designer | Enough
+E28 | Hannah | Mitchell | 1995-05-01 | hannah.mitchell@example.com | designer | Not Enough
+E29 | Chloe | Perez | 1993-06-17 | chloe.perez@example.com | designer | Good
+E30 | Bella | Turner | 1992-12-23 | bella.turner@example.com | designer | Excellent
+E31 | Nora | Rivera | 1995-11-14 | nora.rivera@example.com | designer | Good
+E32 | Zoe | Cox | 1994-03-03 | zoe.cox@example.com | designer | Enough
+E33 | Ivy | Ward | 1996-08-09 | ivy.ward@example.com | designer | Good
+E34 | Ruby | Sanders | 1993-10-10 | ruby.sanders@example.com | designer | Excellent
+E35 | Daisy | Price | 1991-02-28 | daisy.price@example.com | designer | Not Enough
+
+# ==== 12 MARKETER (specialization) ====
+E36 | Mark | Peterson | 1993-02-14 | mark.peterson@example.com | marketer | SEO
+E37 | Alex | Howard | 1992-05-12 | alex.howard@example.com | marketer | Content
+E38 | Ben | Flores | 1994-09-03 | ben.flores@example.com | marketer | Social Media
+E39 | Shawn | Wood | 1991-07-18 | shawn.wood@example.com | marketer | Email Marketing
+E40 | Peter | Gray | 1995-10-01 | peter.gray@example.com | marketer | SEO
+E41 | Adam | Hughes | 1996-02-12 | adam.hughes@example.com | marketer | Social Media
+E42 | Jared | Foster | 1993-11-30 | jared.foster@example.com | marketer | Email Marketing
+E43 | Oscar | Ramirez | 1992-03-28 | oscar.ramirez@example.com | marketer | SEO
+E44 | Kyle | Simmons | 1994-06-02 | kyle.simmons@example.com | marketer | Content
+E45 | Frank | Ortega | 1996-12-24 | frank.ortega@example.com | marketer | Social Media
+E46 | Harold | Gibbs | 1991-09-13 | harold.gibbs@example.com | marketer | Content
+E47 | Sam | Butler | 1995-05-15 | sam.butler@example.com | marketer | SEO
+
+# ==== 3 MANAGER (experience) ====
+E48 | Michael | Brown | 1988-11-22 | michael.brown@example.com | manager | 10
+E49 | Robert | Wilson | 1987-04-09 | robert.wilson@example.com | manager | 8
+E50 | Charles | Anderson | 1989-01-18 | charles.anderson@example.com | manager | 12
+
+
+[PROJECTS]
+# id | name | desc | start | end | completed
+
+# ==== 6 ongoing projects ====
+P1 | Website Revamp | Rebuild company website | 2024-01-01 | None | False
+P2 | Mobile App | Develop new app | 2024-02-15 | None | False
+P3 | AI Chatbot | Internal chatbot system | 2024-03-09 | None | False
+P4 | E-Commerce Platform | Online shop backend | 2024-04-20 | None | False
+P5 | CRM Tool | Customer management tool | 2024-05-11 | None | False
+P6 | Cloud Migration | Move systems to cloud | 2024-06-30 | None | False
+
+# ==== 4 completed projects ====
+P7 | HR Portal | HR system for company | 2023-02-01 | 2023-04-15 | True
+P8 | Data Warehouse | Build DW system | 2023-05-10 | 2023-08-20 | True
+P9 | Branding Redesign | New company brand | 2023-01-12 | 2023-03-10 | True
+P10 | Payment Gateway | Secure payment module | 2023-07-01 | 2023-09-25 | True

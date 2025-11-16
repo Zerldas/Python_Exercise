@@ -1,11 +1,68 @@
 from rich.console import Console
 from rich.table import Table
+from employees.dev import Dev
+from employees.designer import Designer
+from employees.manager import Manager
+from employees.marketer import Marketer
+from project import Project
+import datetime
 
 class System:
     def __init__(self):
         self.employees = []
         self.projects = []
         self.assignments = {}
+    
+        # Khởi tạo dữ liệu
+    def load_from_file(self, filename):
+        print(f"\nĐang tải dữ liệu từ {filename} ...")
+
+        section = None
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if line == "[EMPLOYEES]":
+                    section = "emp"
+                    continue
+                elif line == "[PROJECTS]":
+                    section = "proj"
+                    continue
+                
+                parts = [p.strip() for p in line.split("|")]
+
+                # Employee
+                if section == "emp":
+                    emp_id, first, last, birth, email, role, extra = parts
+                    birth = datetime.datetime.strptime(birth, "%Y-%m-%d").date()
+                    if role == "dev":
+                        obj = Dev(emp_id, first, last, birth, email, extra)
+                    elif role == "designer":
+                        obj = Designer(emp_id, first, last, birth, email, extra)
+                    elif role == "manager":
+                        obj = Manager(emp_id, first, last, birth, email, int(extra))
+                    elif role == "marketer":
+                        obj = Marketer(emp_id, first, last, birth, email, extra)
+                    else:
+                        print(f" Role không hợp lệ: {role}")
+                        continue
+                    
+                    self.add_employee(obj)
+                
+                  # Project
+                elif section == "proj":
+                    pid, name, desc, start, end, completed = parts
+
+                    start = datetime.datetime.strptime(start, "%Y-%m-%d").date()
+                    end = None if end == "None" else datetime.datetime.strptime(end, "%Y-%m-%d").date()
+                    completed = completed.lower() == "true"
+
+                    pr = Project(pid, name, desc, start, end, completed, [])
+                    self.add_project(pr)
+                
+        print("Tải dữ liệu hoàn tất")        
+
 
     # Quản lý nhân viên
     def print_list_employee(self):
@@ -32,7 +89,7 @@ class System:
             elif hasattr(emp, 'experience'):
                 role_spec = f"Manager ({emp.experience} năm KN)"
             
-            table.add_row(str(emp.id), f"{emp.first_name} {emp.last_name}", emp.email, role_spec, f"{emp.calculate_salary:,.2f} VND")
+            table.add_row(str(emp.id), f"{emp.first_name} {emp.last_name}", emp.email, role_spec, f"{emp.calculate_salary():,.2f} VND")
         console.print(table)
 
     # Trả về nhân viên có id tương ứng, nếu không có thì trả về None.
@@ -58,7 +115,6 @@ class System:
 
     # Xóa nhân viên khỏi hệ thống và gỡ họ ra khỏi tất cả các dự án.
     def update_employee(self, emp_id, **kwargs):
-
         # tìm emp theo id
         emp = self.get_employee(emp_id)
         if emp is None:

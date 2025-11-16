@@ -7,16 +7,15 @@ class Manager(Person):
 
     @property
     def experience(self) -> int:
-        return self.experience
+        return self.__experience
 
     @experience.setter
     def experience(self, exp_value: int):
         if not isinstance(exp_value, int) or exp_value < 0:
             raise ValueError("Số năm kinh nghiệm phải là một số nguyên không âm")
-        self._experience = exp_value
+        self.__experience = exp_value
 
-    @property
-    def calculate_salary(self) -> float:
+    def calculate_salary(self):
         # Lương của Manager = Lương cơ bản + Thưởng kinh nghiệm.
         # Giả sử mỗi năm kinh nghiệm được thưởng thêm 2 đơn vị tiền tệ.
         bonus = 2.0 * self.experience
@@ -24,4 +23,8 @@ class Manager(Person):
     
     # --- String Representation ---
     def __str__(self) -> str:
-        return (f"""Manager:  ID: {self.id},\n                            Name: {self.first_name} {self.last_name}\n                            Date Of Birth: {self.birth} (Age: {self.age})\n                            Email Address: {self.email}\n                            Experience: {self.experience} years\n                            Salary: {self.calculate_salary:.2f}""")
+        return (f"""Manager:  ID: {self.id},\n                            
+        Name: {self.first_name} {self.last_name}\n                            
+        Date Of Birth: {self.birth} (Age: {self.age})\n                            Email Address: {self.email}\n                            
+        Experience: {self.experience} years\n                            
+        Salary: {self.calculate_salary:.2f}""")

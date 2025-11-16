@@ -4,8 +4,8 @@ import datetime as date
 # Lớp Person là một lớp cơ sở trừu tượng cho tất cả các loại nhân viên.
 class Person(ABC):
     # Thuộc tính private, sử dụng __ để "name mangling", tránh bị ghi đè ở lớp con.
-    _base_salary = 2000.0 # Lương cơ bản chung
-    _age = 0
+    __base_salary = 2000.0 # Lương cơ bản chung
+    __age = 0
     # Phương thức khởi tạo (constructor) của lớp.
     def __init__(self, id_person, first_name, last_name, birth, email):
         self.id = id_person
@@ -17,38 +17,38 @@ class Person(ABC):
     # --- ID ---
     @property
     def id(self):
-        return self._id
+        return self.__id
 
     @id.setter
     def id(self, id_person):
-        self._id = id_person
+        self.__id = id_person
 
     # --- First Name ---
     @property
     def first_name(self):
-        return self._first_name
+        return self.__first_name
 
     @first_name.setter
     def first_name(self, first_name):
         if not first_name.strip(): 
             raise ValueError("Tên không được để trống")
-        self._first_name = first_name
+        self.__first_name = first_name
 
     # --- Last Name ---
     @property
     def last_name(self):
-        return self._last_name
+        return self.__last_name
 
     @last_name.setter
     def last_name(self, last_name):
         if not last_name.strip(): # Kiểm tra họ không được để trống
             raise ValueError("Họ không được để trống")
-        self._last_name = last_name
+        self.__last_name = last_name
 
     # --- Birth Date ---
     @property
     def birth(self):
-        return self._birth
+        return self.__birth
 
     @birth.setter
     def birth(self, birth):
@@ -64,28 +64,28 @@ class Person(ABC):
         if not (0 <= age <= 120):
             raise ValueError("Ngày sinh không hợp lệ, tuổi phải từ 0 đến 120")
         
-        self._birth = birth
-        self._age = age
+        self.__birth = birth
+        self.__age = age
 
     # Age (Read-Only)
     @property
     def age(self):
-        return self._age
+        return self.__age
 
     # Email
     @property
     def email(self):
-        return self._email
+        return self.__email
 
     @email.setter
     def email(self, email):
         if "@" not in email or "." not in email:
             raise ValueError("Địa chỉ email không hợp lệ")
-        self._email = email
+        self.__email = email
 
     @property
     def base_salary(self):
-        return self._base_salary
+        return self.__base_salary
 
     @property
     @abstractmethod
