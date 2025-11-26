@@ -11,47 +11,42 @@ class SVMAlg:
         self.X = None
         self.y = None
     
-    def load_data(selfm, samples=100):
-        dataset = load_iris()
-        # Lấy 2 lớp đầu tiên để hiện thị 2D
-        X = iris.data[iris.target != 2, :2]
-        y = iris.data[iris.target != 2]
-        self.X = X
-        self.y = y
-
+    def load_data(self):
+        iris = load_iris()
+        # Chỉ lấy 2 lớp đầu tiên để vẽ 2D
+        self.X = iris.data[iris.target != 2, :2]
+        self.y = iris.target[iris.target != 2]
+    
     def train(self):
-        self.svm = SVC(kernel=self.kernel, C=self.c)'
+        self.svm = SVC(kernel=self.kernel, C=self.c)
         self.svm.fit(self.X, self.y)
-
+    
     def draw_boundary(self):
         plt.figure(figsize=(10, 5))
-        plt.scatter(self.X[:, 0], self.X[:, 1], c=self, s=30, cmap=plt.cm.Paired)
+        plt.scatter(self.X[:, 0], self.X[:, 1], c=self.y, s=30, cmap=plt.cm.Paired)
 
         ax = plt.gca()
         xlim = ax.get_xlim()
         ylim = ax.get_ylim()
 
-        xx = np.linespace(xlim[0], xlim[1], 100)
-        yy = np.linespace(ylim[0], ylim[1], 100)
+        xx = np.linspace(xlim[0], xlim[1], 100)
+        yy = np.linspace(ylim[0], ylim[1], 100)
 
-        YY = np.meshgrid(yy, xx)
-        XX = np.meshgrid(yy, xx)
+        XX, YY = np.meshgrid(xx, yy)
         xy = np.vstack([XX.ravel(), YY.ravel()]).T
-        Z = self.svm.decesion_function(xy).reshape(XX.shape)
+        Z = self.svm.decision_function(xy).reshape(XX.shape)
 
         # Vẽ đường phân cách
-        ax.countor(XX, YY, Z, colors='k',
-                    levels=[-1, 0, 1], alpha=0.7,
-                    linestyles=['--', '-', '--']
-                    )
+        ax.contour(XX, YY, Z, colors='k',
+                   levels=[-1, 0, 1], alpha=0.7,
+                   linestyles=['--', '-', '--'])
 
-        # Đánh dấu các vector
+        # Đánh dấu các support vectors
         ax.scatter(self.svm.support_vectors_[:, 0],
-                    self.svm.support_vectors_[:, 1],
-                    s=100, linewidth=1, edgecolors='k'
-                    )
+                   self.svm.support_vectors_[:, 1],
+                   s=100, linewidth=1, edgecolors='k')
 
         plt.xlabel("Sepal length (cm)")
-        plt.ylabel ("Sepal width (cm)")
+        plt.ylabel("Sepal width (cm)")
         plt.title("Thuật toán SVM")
         plt.show()

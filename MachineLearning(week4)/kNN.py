@@ -13,50 +13,57 @@ class KNNAlg:
         self.test_point = None
         self.distances = None
         self.sorted_indices = None
+        self.anim = None  # giữ animation sống
 
     def load_data(self):
         dataset = load_iris()
-        self.X  = iris.data[:, :2]
-        self.y = target
+        self.X = dataset.data[:, :2]
+        self.y = dataset.target
 
     def fit(self):
-        self.model.fit(self, point=None) 
+        self.knn.fit(self.X, self.y)
 
-    def set_test_point(self, point=None)
+    def set_test_point(self, point=None):
         if point is None:
-            min = self.X.min(axis=0)
-            max = self.X.max(axis=1)
-            self.test_point = np.random.uniform(min, max)
+            min_val = self.X.min(axis=0)
+            max_val = self.X.max(axis=0)
+            self.test_point = np.random.uniform(min_val, max_val)
         else:
             self.test_point = np.array(point)
-        # Tính khoảng cách trong không gian dữ liệu
-        self.distances = np.linal.norm(self.X - self.test_point, axis=1)
-        self.sorte_indices = np.argsort(self.distances)
 
-    def animate(self):
+        # Chỉ cần 1D array cho plot
+        self.distances = np.linalg.norm(self.X - self.test_point, axis=1)
+        self.sorted_indices = np.argsort(self.distances)
+
+    def animation(self):
         fig, ax = plt.subplots(figsize=(10, 5))
-        scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y, cmap='viridis', s=50)
-        test_dot, = ax.plot([], [], 'ro', markersize =10, label="Test Point")
-        highlight, = ax.plot([], [], 'kx', markersize=12, markeredgewidht=3, labels='Neighbors')
 
-        ax.legend()
-        ax.set_title("Thuật toán KNN")
+        # scatter cho dữ liệu gốc
+        scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y, cmap='viridis', s=50)
+
+        # test point và neighbors
+        test_dot, = ax.plot([], [], 'ro', markersize=10, label="Test Point")
+        highlight, = ax.plot([], [], 'kx', markersize=12, markeredgewidth=3, label='Neighbors')
+
         ax.set_xlim(self.X[:, 0].min() - 0.5, self.X[:, 0].max() + 0.5)
         ax.set_ylim(self.X[:, 1].min() - 0.5, self.X[:, 1].max() + 0.5)
+        ax.set_title("Thuật toán KNN")
+        ax.legend()
 
         def update(frame):
             k_now = frame + 1
             neighbor_indices = self.sorted_indices[:k_now]
             neighbors = self.X[neighbor_indices]
 
-            test_dot.set_data(self.test_point[0], self.test_point[1])
+            # Cập nhật vị trí test point
+            test_dot.set_data([self.test_point[0]], [self.test_point[1]])
+
+            # Cập nhật vị trí neighbors
             highlight.set_data(neighbors[:, 0], neighbors[:, 1])
+
             ax.set_title(f"Tìm {k_now} / {self.k} Nearest Neighbors")
-
             return scatter, test_dot, highlight
+        
+        self.anim = FuncAnimation(fig, update, frames=self.k, interval=800, repeat=False)
 
-        animation = FuncAnimation(fig, udpate, frame=self.k, interval=800, repeat=False)
-
-    def predict(self):
-        label = self.model.predict([self.test_point])[0]
-        print(f"Predict: {self.test_point}: {label}")
+        plt.show()

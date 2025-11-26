@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from sklearn.datasets import load_iris
-from sllearn.cluster import KMeans
+from sklearn.cluster import KMeans
 
 class KMeanAlg:
     def __init__(self, cluster=3, random_state=42):
@@ -29,8 +29,8 @@ class KMeanAlg:
         
     def animation(self):
         fig, ax = plt.subplots()
-        scatter = ax.scatter(self.X[1:, 0], self.X[:, 1], c='viridis', s=50)
-        centers_plot = ax.plot([], [], 'rX', markersize=12, markeredgewidth=3)
+        scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.labels_history[0], cmap='viridis', s=50)
+        centrals_plot, = ax.plot([], [], 'rX', markersize=12, markeredgewidth=3)
 
         ax.set_xlim(self.X[:, 0].min() - 0.5, self.X[:, 0].max() + 0.5)
         ax.set_ylim(self.X[:, 1].min() - 0.5, self.X[:, 1].max() + 0.5)
@@ -41,10 +41,10 @@ class KMeanAlg:
             central = self.central_history[frame]
             scatter.set_offsets(self.X)
             scatter.set_array(labels)
-            centers_plot.set_data(central[:, 0], central[:, 1])
+            centrals_plot.set_data(central[:, 0], central[:, 1])
             ax.set_title(f"Iteration: {frame + 1}")
-            return scatter, centers_plot
+            return scatter, centrals_plot
         
-        animation = FuncAnimation(fig, update, frames=len(self.central_history), interval=500, repeat=False)
+        self.anim = FuncAnimation(fig, update, frames=len(self.central_history), interval=500, repeat=False)
         plt.show()
         
