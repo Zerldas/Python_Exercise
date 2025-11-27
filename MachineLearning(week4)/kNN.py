@@ -13,7 +13,6 @@ class KNNAlg:
         self.test_point = None
         self.distances = None
         self.sorted_indices = None
-        self.anim = None  # giữ animation sống
 
     def load_data(self):
         dataset = load_iris()
@@ -38,32 +37,40 @@ class KNNAlg:
     def animation(self):
         fig, ax = plt.subplots(figsize=(10, 5))
 
-        # scatter cho dữ liệu gốc
-        scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y, cmap='viridis', s=50)
+        scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y, cmap='viridis', s=70)
 
-        # test point và neighbors
-        test_dot, = ax.plot([], [], 'ro', markersize=10, label="Test Point")
-        highlight, = ax.plot([], [], 'kx', markersize=12, markeredgewidth=3, label='Neighbors')
+        test_dot, = ax.plot([], [], 'ko', markerfacecolor='none', markeredgewidth=1, markersize=5, label="Test Point")
+
+        highlight, = ax.plot([], [], 'kx', color='red', markersize=5, markeredgewidth=1, label='Neighbors')
 
         ax.set_xlim(self.X[:, 0].min() - 0.5, self.X[:, 0].max() + 0.5)
         ax.set_ylim(self.X[:, 1].min() - 0.5, self.X[:, 1].max() + 0.5)
-        ax.set_title("Thuật toán KNN")
+        ax.set_xlabel("Sepal length")
+        ax.set_ylabel("Sepal width")
+        ax.set_title("KNN")
         ax.legend()
 
+        # test point
+        tx, ty = self.test_point
+        test_dot.set_data([tx], [ty])
+
+        # thứ tự index theo khoảng cách
+        sorted_idx = self.sorted_indices
+
         def update(frame):
-            k_now = frame + 1
-            neighbor_indices = self.sorted_indices[:k_now]
-            neighbors = self.X[neighbor_indices]
+            # frame chạy từ 0 → k-1
+            if frame < self.k:
+                hit = sorted_idx[:frame+1]  # tăng dần số neighbors
+            else:
+                hit = sorted_idx[:self.k]
 
-            # Cập nhật vị trí test point
-            test_dot.set_data([self.test_point[0]], [self.test_point[1]])
-
-            # Cập nhật vị trí neighbors
+            neighbors = self.X[hit]
             highlight.set_data(neighbors[:, 0], neighbors[:, 1])
 
-            ax.set_title(f"Tìm {k_now} / {self.k} Nearest Neighbors")
+            ax.set_title(f"Tìm neighbor {len(hit)} / {self.k}")
+
             return scatter, test_dot, highlight
-        
-        self.anim = FuncAnimation(fig, update, frames=self.k, interval=800, repeat=False)
+
+        self.anim = FuncAnimation(fig, update, frames=self.k, interval=600, repeat=False)
 
         plt.show()

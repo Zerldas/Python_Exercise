@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow.keras import model, layers
-from tensorflow.keras.datasets import tfds
+from tensorflow.keras import models, layers
+import tensorflow_datasets as tfds
 from tensorflow.keras.utils import to_categorical
 
 class LetterModel:
@@ -64,7 +64,7 @@ class LetterModel:
     
 
     def build_model(self):
-        self.model = model.Sequential([
+        self.model = models.Sequential([
             layers.Conv2D(32, (3, 3), activation='relu', input_shape=self.input_shape),
             layers.MaxPooling2D((2, 2)),
             layers.Conv2D(64, (3, 3), activation='relu'),

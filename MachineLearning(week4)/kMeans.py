@@ -28,13 +28,15 @@ class KMeanAlg:
             self.kmeans.max_iter += 1
         
     def animation(self):
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10, 5))
         scatter = ax.scatter(self.X[:, 0], self.X[:, 1], c=self.labels_history[0], cmap='viridis', s=50)
         centrals_plot, = ax.plot([], [], 'rX', markersize=12, markeredgewidth=3)
 
         ax.set_xlim(self.X[:, 0].min() - 0.5, self.X[:, 0].max() + 0.5)
         ax.set_ylim(self.X[:, 1].min() - 0.5, self.X[:, 1].max() + 0.5)
         ax.set_title("Biểu đồ hiển thị cách hoạt động của thuật toán K-Means")
+        ax.set_xlabel("Chiều dài đài hoa (sepal length)")
+        ax.set_ylabel("Chiều rộng đài hoa (sepal width)")
 
         def update(frame):
             labels = self.labels_history[frame]
