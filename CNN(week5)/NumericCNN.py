@@ -4,6 +4,7 @@ import tensorflow as tf
 from tensorflow.keras import models, layers
 import tensorflow_datasets as tfds
 from tensorflow.keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
 
 class LetterModel:
     def __init__(self):
@@ -27,7 +28,8 @@ class LetterModel:
             split=['train', 'test'],
             shuffle_files=True, # Không đọc theo thứ tự
             as_supervised=True, # Dùng để nhận dữ liệu dạng (image, label)
-            with_info=True
+            with_info=True,
+            data_dir=r"D:\New_Project\Python\HK1_2025-2026\CNN(week5)\data"
         )
 
         # Chuyển dữ liệu sang numpy array
@@ -86,12 +88,14 @@ class LetterModel:
             epochs=epochs,
             batch_size=batch_size,
             validation_data=(X_val, y_val),
-            verbose=2
+            verbose=1
         )
 
     def evaluate(self, X_test, y_test):
         test_loss, test_acc = self.model.evaluate(X_test, y_test, verbose=0)
         print(f"Test accuracy: {test_acc:.4f}")
+        print(f"Test loss: {test_loss:.4f}")
+
 
     def plot_history(self):
         plt.plot(self.history.history['accuracy'], label='Train Accuracy')

@@ -19,8 +19,8 @@ class TitanicDecesionTree:
 
     # Hàm tải dữ liệu
     def load_data(self):
-        self.data = pd.read_csv(self.url, header=None)
-        cols = data.shape[1]
+        self.data = pd.read_csv(self.url)
+        cols = self.data.shape[1]
         self.data.dropna(subset=['Survived'], inplace=True)
 
         # Chọn ra các cột để train
@@ -33,9 +33,9 @@ class TitanicDecesionTree:
         df['Age'].fillna(df['Age'].median(), inplace=True)
         df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
 
-        # Mã hóa các dạng dữ liệu chũ
+        # Mã hóa các dạng dữ liệu chữ
         labels_encoders = {}
-        for col in ["sex", "Embarked"]:
+        for col in ["Sex", "Embarked"]:
             le = LabelEncoder()
             df[col] = le.fit_transform(df[col])
             labels_encoders[col] = le 
@@ -56,7 +56,7 @@ class TitanicDecesionTree:
     # Hàm đánh giá mô hình
     def evaluate(self):
         y_pred = self.model.predict(self.X_test)
-        y_probability = self.model.predic_proba(self.X_test)
+        y_probability = self.model.predict_proba(self.X_test)
 
 
         accuracy = accuracy_score(self.y_test, y_pred)
@@ -67,14 +67,19 @@ class TitanicDecesionTree:
 
     # Hàm vẽ cây quyết định
     def draw_decesion_tree(self):
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(40, 20)) 
+
         plot_tree(
             self.model,
             feature_names=self.labels,
             class_names=["Not survived", "Survived"],
-            filled=True,
-            rounded=True,
-            fontsize=10
-        ) 
-        plt.title("Decision Tree - Titanic Dataset")
+            precision=2,
+            filled=True,           
+            rounded=True,          
+            fontsize=12,           
+            proportion=True,       
+            impurity=False         
+        )
+
+        plt.title("Decision Tree - Titanic Dataset", fontsize=20)
         plt.show()
