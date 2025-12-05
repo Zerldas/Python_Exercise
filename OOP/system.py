@@ -144,7 +144,7 @@ class System:
         table.add_column("Ngày bắt đầu")
         table.add_column("Ngày kết thúc")
         table.add_column("Trạng thái")
-        table.add_column("Số lượng TV", justify="center")
+        table.add_column("Số lượng thành viên:", justify="center")
 
         for proj in self.projects:
             table.add_row(str(proj.id), proj.name, str(proj.start_date), str(proj.end_date or "N/A"), proj.progress(), str(len(proj.team_members)))

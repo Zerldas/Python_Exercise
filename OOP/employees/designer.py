@@ -31,6 +31,7 @@ class Designer(Person):
     def __str__(self) -> str:
         return (f"""Designer: ID: {self.id},\n                           
         Name: {self.first_name} {self.last_name}\n                            
-        Date Of Birth: {self.birth} (Age: {self.age})\n                            Email Address: {self.email}\n                            
+        Date Of Birth: {self.birth} (Age: {self.age})\n                            
+        Email Address: {self.email}\n                            
         KPI: {self.kpi}\n                            
         Salary: {self.calculate_salary:.2f}""")

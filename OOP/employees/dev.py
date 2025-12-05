@@ -31,6 +31,7 @@ class Dev(Person):
         return (f"""Dev:      
         ID: {self.id},\n                           
         Name: {self.first_name} {self.last_name}\n                        
-        Date Of Birth: {self.birth} (Age: {self.age})\n                            Email Address: {self.email}\n                          
+        Date Of Birth: {self.birth} (Age: {self.age})\n                            
+        Email Address: {self.email}\n                          
         Role: {self.role}\n                            
         Salary: {self.calculate_salary:.2f}""")

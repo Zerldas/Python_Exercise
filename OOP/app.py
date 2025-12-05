@@ -91,7 +91,7 @@ class App:
         emp_id = input("Nhập ID nhân viên: ").strip()
         emp = self.system.get_employee(emp_id)
         if emp:
-            self.emp.__str__
+            emp.__str__
         else:
             print("Không tìm thấy nhân viên với ID này.")
 
