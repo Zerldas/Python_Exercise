@@ -225,10 +225,11 @@ class App:
     def show_employee_assignments(self):
         emp_id = input("ID Nhân viên: ").strip()
         list_assign = self.system.get_employee_assignments(emp_id)
-        if list_assig:
-            print(f"\nDanh sách các dự án của nhân viên: ")
+        if list_assign:
+            print("\nDanh sách các dự án của nhân viên: ")
+            print(list_assign)
         else:
-            print(f"Nhân viên đang không làm việc với dự án nào")
+            print("Nhân viên đang không làm việc với dự án nào")
     # Run app
     def run(self):
         menu = {

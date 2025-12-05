@@ -102,9 +102,9 @@ class System:
     # Thêm một nhân viên mới vào hệ thống.
     def add_employee(self, employee):
         if not hasattr(employee, "id"):
-            raise ValueError("Employee object must have an 'id' attribute")
+            raise ValueError("Nhân viên cần phải có id")
         if self.get_employee(employee.id) is not None:
-            raise ValueError(f"Employee with id={employee.id} already exists")
+            raise ValueError(f"Nhân viên với id={employee.id} đã tồn tại")
         self.employees.append(employee)
 
     # Xóa một nhân viên ra khổi hệ thống
@@ -118,7 +118,7 @@ class System:
         # tìm emp theo id
         emp = self.get_employee(emp_id)
         if emp is None:
-            raise ValueError(f"No employee found with id = {emp_id}")
+            raise ValueError(f"Không tìm thấy nhân viên với id = {emp_id}")
         for key, value in kwargs.items():
             if hasattr(emp, key):
                 setattr(emp, key, value)

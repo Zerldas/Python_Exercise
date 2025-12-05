@@ -14,7 +14,6 @@ class Person(ABC):
         self.birth = birth 
         self.email = email
 
-    # --- ID ---
     @property
     def id(self):
         return self.__id
@@ -23,7 +22,6 @@ class Person(ABC):
     def id(self, id_person):
         self.__id = id_person
 
-    # --- First Name ---
     @property
     def first_name(self):
         return self.__first_name
@@ -34,7 +32,6 @@ class Person(ABC):
             raise ValueError("Tên không được để trống")
         self.__first_name = first_name
 
-    # --- Last Name ---
     @property
     def last_name(self):
         return self.__last_name
@@ -45,7 +42,6 @@ class Person(ABC):
             raise ValueError("Họ không được để trống")
         self.__last_name = last_name
 
-    # --- Birth Date ---
     @property
     def birth(self):
         return self.__birth
@@ -67,12 +63,11 @@ class Person(ABC):
         self.__birth = birth
         self.__age = age
 
-    # Age (Read-Only)
+    # (Read-Only)
     @property
     def age(self):
         return self.__age
 
-    # Email
     @property
     def email(self):
         return self.__email

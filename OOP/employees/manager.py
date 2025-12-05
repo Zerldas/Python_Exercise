@@ -21,10 +21,10 @@ class Manager(Person):
         bonus = 2.0 * self.experience
         return self.base_salary + bonus
     
-    # --- String Representation ---
     def __str__(self) -> str:
         return (f"""Manager:  ID: {self.id},\n                            
         Name: {self.first_name} {self.last_name}\n                            
-        Date Of Birth: {self.birth} (Age: {self.age})\n                            Email Address: {self.email}\n                            
+        Date Of Birth: {self.birth} (Age: {self.age})\n 
+        Email Address: {self.email}\n                            
         Experience: {self.experience} years\n                            
         Salary: {self.calculate_salary:.2f}""")
